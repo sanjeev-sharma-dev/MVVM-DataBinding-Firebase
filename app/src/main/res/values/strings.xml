@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DataBinding-android</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+</resources>

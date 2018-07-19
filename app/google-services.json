@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "375652738300",
+    "firebase_url": "https://databindig.firebaseio.com",
+    "project_id": "databindig",
+    "storage_bucket": "databindig.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375652738300:android:5ca77ea4588aef58",
+        "android_client_info": {
+          "package_name": "com.mobilityrocks.databinding_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375652738300-66nsmk4rt350r6mun4g3et68fu856p6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD203PSb1CRtUZx8Ue8YRHaQJO7GDRyf3s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.mobilityrocks.databinding_android.viewmodels.LoginViewModel"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20sp"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:inputType="textEmailAddress"
+                android:padding="10sp"
+                android:singleLine="true"
+                android:backgroundTint="@color/colorWhite"
+                app:addTextChangedListener="@{loginViewModel.emailTextWatcher}"
+                android:hint="@string/hint_email" />
+
+        </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorGray"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_password"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5sp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/input_password"
+                android:layout_width="match_parent"
+                android:padding="10sp"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                app:addTextChangedListener="@{loginViewModel.passwordTextWatcher}"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="10sp"
+            android:clickable="true"
+            android:textColor="@color/selector_text_primary_dark"
+            android:text="Forgot Password?"/>
+
+
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:onClick="@{(v)->loginViewModel.firebaseLoginCredentials()}"
+            android:textColor="@color/selector_text_white"
+            android:layout_marginTop="20sp"
+            android:clickable="true"
+            android:background="@color/colorPrimary"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10sp"
+            android:clickable="true"
+            android:textColor="@color/selector_text_primary_dark"
+            android:text="Create New Account ?"
+            android:layout_marginTop="5sp"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
+
+    </LinearLayout>
+
+
+
+
+</layout>
