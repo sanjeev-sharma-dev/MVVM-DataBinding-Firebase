@@ -3,13 +3,13 @@ package com.mobilityrocks.databinding_android.viewmodels;
 import android.app.Activity;
 import android.databinding.BaseObservable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.widget.ProgressBar;
 
 import com.mobilityrocks.databinding_android.intefaces.LoginCallbacks;
 import com.mobilityrocks.databinding_android.Utilities.Utils;
-import com.mobilityrocks.databinding_android.datamodels.LoginDataModel;
-import com.mobilityrocks.databinding_android.pojos.Login;
+import com.mobilityrocks.databinding_android.datamodels.Login;
 
 public class LoginViewModel extends BaseObservable {
     Login login;
@@ -29,6 +29,7 @@ public class LoginViewModel extends BaseObservable {
     public void firebaseLoginCredentials() {
 
         if (login.isEmailEmpty()||!Utils.getInstance().isValidEmail(login.getEmail()))
+
             loginCallbacks.onNotValidEmail();
 
          else if (login.isPaswordEmpty() || login.getPassword().length() < 6) {
@@ -60,6 +61,7 @@ public class LoginViewModel extends BaseObservable {
             public void afterTextChanged(Editable editable) {
 
                 login.setEmail(editable.toString());
+
 
 
             }

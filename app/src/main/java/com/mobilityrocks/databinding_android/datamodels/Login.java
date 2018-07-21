@@ -1,4 +1,4 @@
-package com.mobilityrocks.databinding_android.pojos;
+package com.mobilityrocks.databinding_android.datamodels;
 
 import android.app.Activity;
 import android.databinding.BaseObservable;
