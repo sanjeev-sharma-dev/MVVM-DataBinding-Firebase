@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mobilityrocks.databinding_android.Utilities.Utils;
 import com.mobilityrocks.databinding_android.intefaces.LoginCallbacks;
 
 import org.w3c.dom.Text;
@@ -47,32 +48,37 @@ public class Login extends BaseObservable {
     }
 
 
-    public void firebaseLoginResponse(final ProgressBar progressBar, final LoginCallbacks loginCallbacks, Activity activity){
+    public void firebaseLoginResponse( final LoginCallbacks loginCallbacks, Activity activity){
 
-        FirebaseAuth  firebaseAuth=FirebaseAuth.getInstance();
+        if (Utils.getInstance().isNetworkConnected(activity)) {
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        progressBar.setVisibility(View.VISIBLE);
+            Utils.getInstance().pDialogShow(activity);
 
-        firebaseAuth.signInWithEmailAndPassword(getEmail(), getPassword())
-                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            firebaseAuth.signInWithEmailAndPassword(getEmail(), getPassword())
+                    .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        progressBar.setVisibility(View.GONE);
+                           Utils.getInstance().pDilaogHide();
 
-                        if (task.isSuccessful()) {
+                            if (task.isSuccessful()) {
 
-                            loginCallbacks.onLoginSucess("Login Success");
+                                loginCallbacks.onLoginSucess("Login Success");
 
-                        }else {
+                            } else {
 
-                            loginCallbacks.onLoginFailure(task.getException().getMessage());
+                                loginCallbacks.onLoginFailure(task.getException().getMessage());
 
+                            }
                         }
-                    }
-                });
+                    });
 
+        }else{
 
+            loginCallbacks.onNetworkConnectionFailure(false);
+
+        }
 
     }
 

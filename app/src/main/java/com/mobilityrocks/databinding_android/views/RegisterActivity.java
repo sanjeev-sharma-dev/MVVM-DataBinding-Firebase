@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.mobilityrocks.databinding_android.R;
+import com.mobilityrocks.databinding_android.Utilities.Utils;
 import com.mobilityrocks.databinding_android.databinding.ActivityRegisterBinding;
 import com.mobilityrocks.databinding_android.intefaces.RegsterCallBacks;
 import com.mobilityrocks.databinding_android.viewmodels.RegisterViewModel;
@@ -19,7 +21,16 @@ public class RegisterActivity extends AppCompatActivity implements RegsterCallBa
         super.onCreate(savedInstanceState);
 
         activityRegisterBinding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        activityRegisterBinding.setRegisterViewModel(new RegisterViewModel(this, activityRegisterBinding.progress, this));
+        activityRegisterBinding.setRegisterViewModel(new RegisterViewModel(this, this));
+        activityRegisterBinding.toolbar.setTitle("Create Account");
+        activityRegisterBinding.toolbar.setNavigationIcon(R.drawable.ic_back_white);
+        setSupportActionBar(activityRegisterBinding.toolbar);
+        activityRegisterBinding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -66,5 +77,14 @@ public class RegisterActivity extends AppCompatActivity implements RegsterCallBa
     @Override
     public void onFiledReistration(String result) {
         activityRegisterBinding.errorMessageTV.setText(result);
+    }
+
+    @Override
+    public void onNetworkConnectionFailure(boolean isConnected) {
+        Utils.getInstance().showSnack(isConnected,activityRegisterBinding.container);
+    }
+
+    public void navigateToLoginScreen(View view){
+       onBackPressed();
     }
 }

@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.0.2'
     implementation 'com.google.firebase:firebase-database:16.0.1'
 
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

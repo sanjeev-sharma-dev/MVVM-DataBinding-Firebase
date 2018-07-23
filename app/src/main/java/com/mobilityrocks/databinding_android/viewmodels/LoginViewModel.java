@@ -18,11 +18,10 @@ public class LoginViewModel extends BaseObservable {
     ProgressBar progressBar;
 
 
-    public LoginViewModel(LoginCallbacks loginCallbacks, Activity activity, ProgressBar progressBar) {
+    public LoginViewModel(LoginCallbacks loginCallbacks, Activity activity) {
         login = new Login();
         this.loginCallbacks = loginCallbacks;
         this.activity = activity;
-        this.progressBar=progressBar;
 
     }
 
@@ -38,7 +37,7 @@ public class LoginViewModel extends BaseObservable {
 
         } else {
 
-            login.firebaseLoginResponse(progressBar,loginCallbacks, activity);
+            login.firebaseLoginResponse(loginCallbacks, activity);
 
         }
 

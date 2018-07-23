@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mobilityrocks.databinding_android.Utilities.Constants;
+import com.mobilityrocks.databinding_android.Utilities.Utils;
 import com.mobilityrocks.databinding_android.intefaces.RegsterCallBacks;
 
 import java.util.HashMap;
@@ -87,41 +88,43 @@ public class Register extends BaseObservable {
         return true;
     }
 
-    public void firebaseRegisterResponse(final RegsterCallBacks regsterCallBacks, final ProgressBar progressBar, Activity activity)
-    {
+    public void firebaseRegisterResponse(final RegsterCallBacks regsterCallBacks, Activity activity) {
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        final DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("users");
+        if (Utils.getInstance().isNetworkConnected(activity)) {
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
 
-        progressBar.setVisibility(View.VISIBLE);
-        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+            Utils.getInstance().pDialogShow(activity);
+            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                progressBar.setVisibility(View.GONE);
+                   Utils.getInstance().pDilaogHide();
 
-                if (task.isSuccessful()){
-
-
-                    Map<String, String> map = new HashMap<String, String>();
-                    map.put(Constants.EMAIL,email);
-                    map.put(Constants.USERNAME,username);
-                    map.put(Constants.PASSWORD,password);
-
-                    databaseReference.child(task.getResult().getUser().getUid()).setValue(map);
-
-                    regsterCallBacks.onSucessFullRegistration();
+                    if (task.isSuccessful()) {
 
 
-                }else{
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put(Constants.EMAIL, email);
+                        map.put(Constants.USERNAME, username);
 
-                    regsterCallBacks.onFiledReistration(task.getException().getMessage());
+                        databaseReference.child(task.getResult().getUser().getUid()).setValue(map);
 
+                        regsterCallBacks.onSucessFullRegistration();
+
+
+                    } else {
+
+                        regsterCallBacks.onFiledReistration(task.getException().getMessage());
+
+                    }
                 }
-            }
-        });
+            });
 
 
+        }else{
+              regsterCallBacks.onNetworkConnectionFailure(false);
+        }
     }
 
 }

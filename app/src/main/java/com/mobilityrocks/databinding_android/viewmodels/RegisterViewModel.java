@@ -17,13 +17,12 @@ public class RegisterViewModel extends BaseObservable {
     Register register;
     RegsterCallBacks regsterCallBacks;
     Activity activity;
-    ProgressBar progressBar;
 
-    public RegisterViewModel(RegsterCallBacks regsterCallBacks,ProgressBar progressBar,Activity activity) {
+    public RegisterViewModel(RegsterCallBacks regsterCallBacks,Activity activity) {
         register = new Register();
         this.regsterCallBacks=regsterCallBacks;
         this.activity=activity;
-        this.progressBar=progressBar;
+
     }
 
     public void firebaseRegisterCredentials(){
@@ -38,7 +37,7 @@ public class RegisterViewModel extends BaseObservable {
         }else if (register.isPasswordMatch()){
            regsterCallBacks.onConfirmPasswordMatch();
         }else{
-           register.firebaseRegisterResponse(regsterCallBacks,progressBar,activity);
+           register.firebaseRegisterResponse(regsterCallBacks,activity);
         }
 
     }

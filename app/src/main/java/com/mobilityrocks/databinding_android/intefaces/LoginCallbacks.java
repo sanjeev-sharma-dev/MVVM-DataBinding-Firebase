@@ -7,6 +7,7 @@ public interface LoginCallbacks {
     void  onPasswordEmpty();
     void onLoginSucess(String result);
     void onLoginFailure(String result);
+    void onNetworkConnectionFailure(boolean isConnected);
 
 
 }

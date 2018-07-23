@@ -16,4 +16,6 @@ public interface RegsterCallBacks {
 
     void onFiledReistration(String result);
 
+    void onNetworkConnectionFailure(boolean isConnected);
+
 }

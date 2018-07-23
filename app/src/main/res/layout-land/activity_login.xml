@@ -11,15 +11,35 @@
     </data>
 
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
 
 
         <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.Toolbar
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:titleTextAppearance="@style/ToolbarTitleHorizontal"
+                    android:background="@color/colorPrimary"
+                    app:titleTextColor="@color/colorWhite"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    />
+
+                <android.support.v4.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,6 +69,8 @@
                     android:id="@+id/input_layout_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorAccent"
                     android:layout_marginTop="5dp">
 
                     <EditText
@@ -69,6 +91,7 @@
                     android:layout_gravity="right"
                     android:clickable="true"
                     android:padding="10sp"
+                    android:onClick="onNavigateToForgotPasswordScreen"
                     android:textSize="15sp"
                     android:text="Forgot Password?"
                     android:textColor="@color/selector_text_primary_dark" />
@@ -90,7 +113,7 @@
                     android:background="@color/colorPrimary"
                     android:clickable="true"
                     android:onClick="@{(v)->loginViewModel.firebaseLoginCredentials()}"
-                    android:text="Login"
+                    android:text="@string/login_text"
                     android:textColor="@color/selector_text_white" />
 
 
@@ -109,16 +132,10 @@
 
             </LinearLayout>
 
-            <ProgressBar
-                android:id="@+id/progress"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:visibility="gone" />
+                </android.support.v4.widget.NestedScrollView>
+
+            </LinearLayout>
 
         </FrameLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
 
 </layout>

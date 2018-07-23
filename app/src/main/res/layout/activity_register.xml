@@ -11,13 +11,31 @@
     </data>
 
     <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                app:titleTextColor="@color/colorWhite"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -59,6 +77,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_password"
                 android:layout_width="match_parent"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -66,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_password"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:padding="10sp"
                     android:singleLine="true"
                     app:addTextChangedListener="@{RegisterViewModel.passwordTextWatcher}"
@@ -77,6 +97,8 @@
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_confirm_password"
                 android:layout_width="match_parent"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/colorAccent"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -84,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_confirm_password"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPassword"
                     android:padding="10sp"
                     android:singleLine="true"
                     app:addTextChangedListener="@{RegisterViewModel.confirmPasswordTextWatcher}"
@@ -111,18 +133,20 @@
                 android:layout_marginTop="20sp"
                 android:background="@color/colorPrimary"
                 android:clickable="true"
-                android:text="Register"
+                android:text="@string/create_account_text"
                 android:onClick="@{(v)->RegisterViewModel.firebaseRegisterCredentials()}"
                 android:textColor="@color/selector_text_white" />
 
 
             <TextView
+                android:id="@+id/alreadyHavAccountTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5sp"
                 android:clickable="true"
                 android:padding="10sp"
+                android:onClick="navigateToLoginScreen"
                 android:gravity="center"
                 android:text="@string/already_have_account_text"
                 android:textColor="@color/selector_text_primary_dark" />
@@ -132,12 +156,8 @@
 
         </LinearLayout>
 
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+        </LinearLayout>
+
 
     </FrameLayout>
 
